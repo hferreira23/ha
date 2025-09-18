@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch: {}
+  schedule:
+    - cron: '0 3 * * *'
 
 env:
   IMAGE_NAME: hferreira/ha
@@ -41,9 +43,7 @@ jobs:
           push: true
           tags: |
             ${{ env.IMAGE_NAME }}:amd64
-            ${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ github.repository }}:amd64
-            ghcr.io/${{ github.repository }}:latest
 
   build-arm64:
     name: Build arm64 image
